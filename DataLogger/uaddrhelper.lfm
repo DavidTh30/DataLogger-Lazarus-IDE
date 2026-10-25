@@ -1,0 +1,262 @@
+object AddrHelperForm: TAddrHelperForm
+  Left = 420
+  Height = 360
+  Top = 160
+  Width = 440
+  BorderStyle = bsDialog
+  Caption = 'Address helper'
+  ClientHeight = 360
+  ClientWidth = 440
+  Position = poMainFormCenter
+  object LabelProto: TLabel
+    Left = 12
+    Height = 15
+    Top = 10
+    Width = 50
+    Caption = 'Protocol:'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object PanelS7: TPanel
+    Left = 8
+    Height = 130
+    Top = 32
+    Width = 424
+    BevelOuter = bvNone
+    ClientHeight = 130
+    ClientWidth = 424
+    TabOrder = 0
+    object LabelArea: TLabel
+      Left = 4
+      Height = 15
+      Top = 8
+      Width = 25
+      Caption = 'Area'
+    end
+    object ComboArea: TComboBox
+      Left = 110
+      Height = 23
+      Top = 4
+      Width = 200
+      ItemHeight = 15
+      Items.Strings = (
+        'I   - Input'
+        'Q   - Output'
+        'M   - Marker (bit memory)'
+        'DB  - Data block'
+      )
+      OnChange = AnyChange
+      Style = csDropDownList
+      TabOrder = 0
+    end
+    object LabelDB: TLabel
+      Left = 4
+      Height = 15
+      Top = 38
+      Width = 61
+      Caption = 'DB number'
+    end
+    object SpinDB: TSpinEdit
+      Left = 110
+      Height = 23
+      Top = 34
+      Width = 90
+      MaxValue = 65535
+      MinValue = 1
+      OnChange = AnyChange
+      TabOrder = 1
+      Value = 1
+    end
+    object LabelByte: TLabel
+      Left = 4
+      Height = 15
+      Top = 68
+      Width = 63
+      Caption = 'Byte offset'
+    end
+    object SpinByte: TSpinEdit
+      Left = 110
+      Height = 23
+      Top = 64
+      Width = 90
+      MaxValue = 65535
+      OnChange = AnyChange
+      TabOrder = 2
+    end
+    object LabelType: TLabel
+      Left = 220
+      Height = 15
+      Top = 68
+      Width = 54
+      Caption = 'Data type'
+    end
+    object ComboType: TComboBox
+      Left = 290
+      Height = 23
+      Top = 64
+      Width = 130
+      ItemHeight = 15
+      Items.Strings = (
+        'BOOL'
+        'BYTE'
+        'INT'
+        'UINT (WORD)'
+        'DINT'
+        'UDINT (DWORD)'
+        'REAL'
+      )
+      OnChange = AnyChange
+      Style = csDropDownList
+      TabOrder = 3
+    end
+    object LabelBit: TLabel
+      Left = 4
+      Height = 15
+      Top = 98
+      Width = 18
+      Caption = 'Bit'
+    end
+    object SpinBit: TSpinEdit
+      Left = 110
+      Height = 23
+      Top = 94
+      Width = 90
+      MaxValue = 7
+      OnChange = AnyChange
+      TabOrder = 4
+    end
+  end
+  object PanelModbus: TPanel
+    Left = 8
+    Height = 130
+    Top = 32
+    Width = 424
+    BevelOuter = bvNone
+    ClientHeight = 130
+    ClientWidth = 424
+    TabOrder = 1
+    Visible = False
+    object LabelTable: TLabel
+      Left = 4
+      Height = 15
+      Top = 8
+      Width = 29
+      Caption = 'Table'
+    end
+    object ComboTable: TComboBox
+      Left = 110
+      Height = 23
+      Top = 4
+      Width = 260
+      ItemHeight = 15
+      Items.Strings = (
+        '0x  Coil  (FC01, read/write bit)'
+        '1x  Discrete input  (FC02, read-only bit)'
+        '3x  Input register  (FC04, read-only)'
+        '4x  Holding register  (FC03)'
+      )
+      OnChange = AnyChange
+      Style = csDropDownList
+      TabOrder = 0
+    end
+    object LabelReg: TLabel
+      Left = 4
+      Height = 15
+      Top = 38
+      Width = 98
+      Caption = 'Number (1 = first)'
+    end
+    object SpinReg: TSpinEdit
+      Left = 110
+      Height = 23
+      Top = 34
+      Width = 100
+      MaxValue = 65536
+      MinValue = 1
+      OnChange = AnyChange
+      TabOrder = 1
+      Value = 1
+    end
+    object LabelMType: TLabel
+      Left = 4
+      Height = 15
+      Top = 68
+      Width = 54
+      Caption = 'Data type'
+    end
+    object ComboMType: TComboBox
+      Left = 110
+      Height = 23
+      Top = 64
+      Width = 230
+      ItemHeight = 15
+      Items.Strings = (
+        'INT (1 register)'
+        'UINT (1 register)'
+        'DINT (2 registers)'
+        'UDINT (2 registers)'
+        'REAL (2 registers, ABCD)'
+        'REALSW (2 registers, CDAB)'
+      )
+      OnChange = AnyChange
+      Style = csDropDownList
+      TabOrder = 2
+    end
+  end
+  object GroupResult: TGroupBox
+    Left = 8
+    Height = 140
+    Top = 168
+    Width = 424
+    Caption = ' Result '
+    ClientHeight = 120
+    ClientWidth = 420
+    TabOrder = 2
+    object LabelAddr: TLabel
+      Left = 10
+      Height = 30
+      Top = 4
+      Width = 400
+      AutoSize = False
+      Caption = '-'
+      Font.Height = -22
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object LabelDesc: TLabel
+      Left = 10
+      Height = 18
+      Top = 38
+      Width = 400
+      AutoSize = False
+      Caption = '-'
+    end
+    object LabelHint: TLabel
+      Left = 10
+      Height = 56
+      Top = 60
+      Width = 400
+      AutoSize = False
+      Caption = '-'
+      Font.Color = clGrayText
+      ParentFont = False
+      WordWrap = True
+    end
+  end
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 34
+    Top = 320
+    Width = 428
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 3
+    ShowButtons = [pbOK, pbCancel]
+  end
+end

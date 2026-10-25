@@ -1,0 +1,308 @@
+object MainForm: TMainForm
+  Left = 300
+  Height = 470
+  Top = 120
+  Width = 820
+  Caption = 'PLC Data Logger'
+  ClientHeight = 450
+  ClientWidth = 820
+  Constraints.MinHeight = 360
+  Constraints.MinWidth = 560
+  Menu = MainMenu1
+  Position = poScreenCenter
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  object PanelTop: TPanel
+    Left = 0
+    Height = 42
+    Top = 0
+    Width = 820
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 42
+    ClientWidth = 820
+    TabOrder = 0
+    object BtnMonitor: TButton
+      Left = 8
+      Height = 30
+      Hint = 'Read the PLC and show the values (no file)'
+      Top = 6
+      Width = 100
+      Caption = 'Monitor'
+      OnClick = BtnMonitorClick
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+    end
+    object BtnRecord: TButton
+      Left = 114
+      Height = 30
+      Hint = 'Read the PLC and write a CSV row every interval'
+      Top = 6
+      Width = 110
+      Caption = 'Record'
+      Font.Color = clMaroon
+      Font.Style = [fsBold]
+      OnClick = BtnRecordClick
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+    end
+    object BtnStop: TButton
+      Left = 230
+      Height = 30
+      Top = 6
+      Width = 90
+      Caption = 'Stop'
+      OnClick = BtnStopClick
+      TabOrder = 2
+    end
+    object LabelInterval: TLabel
+      Left = 340
+      Height = 15
+      Top = 14
+      Width = 44
+      Caption = 'Interval'
+    end
+    object SpinInterval: TSpinEdit
+      Left = 392
+      Height = 23
+      Hint = 'Time between two records (default 500 ms, minimum 5 ms)'
+      Top = 10
+      Width = 80
+      Increment = 100
+      MaxValue = 600000
+      MinValue = 5
+      OnChange = SpinIntervalChange
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+      Value = 500
+    end
+    object LabelMs: TLabel
+      Left = 478
+      Height = 15
+      Top = 14
+      Width = 17
+      Caption = 'ms'
+    end
+  end
+  object PanelStatus: TPanel
+    Left = 0
+    Height = 30
+    Top = 42
+    Width = 820
+    Align = alTop
+    BevelOuter = bvLowered
+    ClientHeight = 30
+    ClientWidth = 820
+    TabOrder = 1
+    object ShapeConn: TShape
+      Left = 8
+      Height = 16
+      Top = 7
+      Width = 16
+      Brush.Color = clSilver
+      Shape = stCircle
+    end
+    object LabelConn: TLabel
+      Left = 30
+      Height = 16
+      Top = 7
+      Width = 440
+      AutoSize = False
+      Caption = 'Stopped'
+    end
+    object ShapeRec: TShape
+      Left = 478
+      Height = 16
+      Top = 7
+      Width = 16
+      Brush.Color = clSilver
+      Shape = stCircle
+    end
+    object LabelRec: TLabel
+      Left = 500
+      Height = 16
+      Top = 7
+      Width = 312
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
+      Caption = 'not recording'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+  end
+  object GridTags: TStringGrid
+    Left = 0
+    Height = 334
+    Top = 72
+    Width = 820
+    Align = alClient
+    ColCount = 6
+    DefaultRowHeight = 22
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goSmoothScroll]
+    RowCount = 1
+    TabOrder = 2
+    OnEditingDone = GridTagsEditingDone
+    OnKeyDown = GridTagsKeyDown
+    OnMouseDown = GridTagsMouseDown
+    OnMouseMove = GridTagsMouseMove
+    OnMouseUp = GridTagsMouseUp
+    OnPickListSelect = GridTagsEditingDone
+    OnSelectEditor = GridTagsSelectEditor
+    OnSetEditText = GridTagsSetEditText
+    OnPrepareCanvas = GridTagsPrepareCanvas
+  end
+  object PanelTags: TPanel
+    Left = 0
+    Height = 22
+    Top = 406
+    Width = 820
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 22
+    ClientWidth = 820
+    TabOrder = 3
+    object LabelExamples: TLabel
+      Left = 8
+      Height = 15
+      Top = 4
+      Width = 804
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
+      Caption = 'Examples:'
+      ParentShowHint = False
+      ShowHint = True
+      Font.Color = clGrayText
+      ParentFont = False
+    end
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 22
+    Top = 428
+    Width = 820
+    Panels = <
+      item
+        Width = 300
+      end
+      item
+        Width = 50
+      end>
+    SimplePanel = False
+  end
+  object MainMenu1: TMainMenu
+    Left = 560
+    Top = 200
+    object MenuFile: TMenuItem
+      Caption = '&File'
+      object MenuOpen: TMenuItem
+        Caption = '&Open...'
+        ShortCut = 16463
+        OnClick = MenuOpenClick
+      end
+      object MenuSave: TMenuItem
+        Caption = '&Save'
+        ShortCut = 16467
+        OnClick = MenuSaveClick
+      end
+      object MenuSaveAs: TMenuItem
+        Caption = 'Save &As...'
+        OnClick = MenuSaveAsClick
+      end
+      object MenuSep1: TMenuItem
+        Caption = '-'
+      end
+      object MenuLogFolder: TMenuItem
+        Caption = '&Log Folder...'
+        OnClick = MenuLogFolderClick
+      end
+      object MenuOpenFolder: TMenuItem
+        Caption = 'Open &Folder'
+        OnClick = MenuOpenFolderClick
+      end
+      object MenuSep2: TMenuItem
+        Caption = '-'
+      end
+      object MenuExit: TMenuItem
+        Caption = 'E&xit'
+        OnClick = MenuExitClick
+      end
+    end
+    object MenuNetwork: TMenuItem
+      Caption = '&Network Config'
+      object MenuNetSettings: TMenuItem
+        Caption = '&Settings...'
+        OnClick = MenuNetSettingsClick
+      end
+    end
+    object MenuView: TMenuItem
+      Caption = '&View'
+      object MenuTray: TMenuItem
+        Caption = 'Run in &background (tray)'
+        OnClick = MenuTrayClick
+      end
+    end
+    object MenuHelp: TMenuItem
+      Caption = '&Help'
+      object MenuAbout: TMenuItem
+        Caption = '&About'
+        OnClick = MenuAboutClick
+      end
+    end
+  end
+  object Timer1: TTimer
+    Interval = 250
+    OnTimer = Timer1Timer
+    Left = 600
+    Top = 200
+  end
+  object TrayIcon1: TTrayIcon
+    BalloonHint = 'Still logging. Double-click the icon to open the window.'
+    BalloonTitle = 'PLC Data Logger'
+    PopUpMenu = PopupTray
+    Hint = 'PLC Data Logger'
+    OnDblClick = TrayIcon1DblClick
+    Left = 640
+    Top = 200
+  end
+  object PopupTray: TPopupMenu
+    Left = 560
+    Top = 250
+    object TrayShow: TMenuItem
+      Caption = 'Show window'
+      OnClick = TrayShowClick
+    end
+    object TrayStop: TMenuItem
+      Caption = 'Stop'
+      OnClick = TrayStopClick
+    end
+    object TraySep: TMenuItem
+      Caption = '-'
+    end
+    object TrayExit: TMenuItem
+      Caption = 'Exit'
+      OnClick = MenuExitClick
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    DefaultExt = '.dlog'
+    Filter = 'Data logger tag list (*.dlog)|*.dlog|All files|*.*'
+    Left = 600
+    Top = 250
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.dlog'
+    Filter = 'Data logger tag list (*.dlog)|*.dlog|All files|*.*'
+    Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
+    Left = 640
+    Top = 250
+  end
+  object SelectDirectoryDialog1: TSelectDirectoryDialog
+    Left = 600
+    Top = 300
+  end
+end

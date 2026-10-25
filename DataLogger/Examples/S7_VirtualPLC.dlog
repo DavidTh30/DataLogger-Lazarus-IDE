@@ -1,0 +1,30 @@
+[Info]
+Format=PLC Data Logger project 1.0
+
+[Logger]
+IntervalMs=500
+Folder=C:\Users\MS\Desktop\Nonlinear\DataLogger\Logs
+
+[Tags]
+Count=7
+Name0=Heartbeat
+Address0=DB10.DBW42
+Format0=DEC
+Name1=Voltage SP kV
+Address1=DB10.DBD0
+Format1=AUTO
+Name2=Voltage actual kV
+Address2=DB10.DBD8
+Format2=AUTO
+Name3=Output enable
+Address3=DB10.DBX40.0
+Format3=0/1
+Name4=Input I0.1
+Address4=I0.1
+Format4=0/1
+Name5=Tag6
+Address5=IW66
+Format5=DEC
+Name6=Tag7
+Address6=IW64
+Format6=DEC

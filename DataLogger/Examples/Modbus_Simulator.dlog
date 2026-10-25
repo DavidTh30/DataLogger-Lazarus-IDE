@@ -1,0 +1,20 @@
+[Info]
+Format=PLC Data Logger project 1.0
+[Logger]
+IntervalMs=500
+[Tags]
+Count=7
+Name0=Counter
+Address0=40001
+Name1=Sine x1000
+Address1=40002
+Name2=Level ABCD
+Address2=40003:REAL
+Name3=Level CDAB
+Address3=40005:REALSW
+Name4=Time ms
+Address4=40007:DINT
+Name5=Input reg
+Address5=30001
+Name6=Pump coil
+Address6=00001

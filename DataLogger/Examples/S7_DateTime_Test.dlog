@@ -1,0 +1,27 @@
+[Info]
+Format=PLC Data Logger project 1.0
+[Logger]
+IntervalMs=500
+[Tags]
+Count=8
+Name0=Inputs word
+Address0=IW0
+Format0=BIN
+Name1=Date
+Address1=DB20.DBW0:DATE
+Format1=LONG
+Name2=Uptime
+Address2=DB20.DBD2:TIME
+Name3=Time of day
+Address3=DB20.DBD6:TOD
+Name4=Date and time
+Address4=DB20.DBB10:DT
+Format4=ISO
+Name5=DTL
+Address5=DB20.DBB18:DTL
+Format5=LONG
+Name6=Unix time
+Address6=DB20.DBD30:UNIXTIME
+Name7=Counter
+Address7=DB20.DBW34
+Format7=HEX
